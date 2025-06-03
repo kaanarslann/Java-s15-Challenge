@@ -3,6 +3,7 @@ package library.model;
 import library.util.Validator;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Librarian extends Person {
     private String password;
@@ -25,13 +26,9 @@ public class Librarian extends Person {
         library.removeBook(book);
     }
 
-    public void updateBookInfo(Book currentBook, Book newBookInfo) {
+    public void updateBookInfo(Book currentBook, String newTitle, String newCategory) {
         Validator.validate(currentBook);
-        Validator.validate(newBookInfo);
-        library.updateBook(currentBook, newBookInfo);
-
-        /*if(currentBook == null || newBookInfo == null)
-            throw new IllegalArgumentException("Book cannot be null!");*/
+        library.updateBook(currentBook, newTitle, newCategory);
     }
 
     public void approveBorrow(Book book, Reader reader) {
@@ -45,9 +42,25 @@ public class Librarian extends Person {
             if(reader.getRecord().getBookCount() >= 5){
                 System.out.println("Reader has reached maximum book limit. Please return at least 1 book.");
             } else if (!book.isAvailable()) {
-                System.out.println("Requested book is not available.");
+                System.out.println("Requested book is currently borrowed by " + book.getBorrower());
             }
         }
+    }
+
+    public List<Book> listAllBooks() {
+        return library.listAllBooks();
+    }
+
+    public List<Book> filterByAuthor(String authorName) {
+        return library.filterByAuthor(authorName);
+    }
+
+    public List<Book> filterByCategory(String category) {
+        return library.filterByCategory(category);
+    }
+
+    public List<Book> filterByTitle(String title) {
+        return library.filterByTitle(title);
     }
 
     public void approveReturn(Book book, Reader reader) {

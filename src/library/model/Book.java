@@ -10,15 +10,15 @@ public class Book {
     private String category;
     private BookStatus status;
     private LocalDateTime dateOfPurchase;
-    private Reader burrower;
+    private Reader borrower;
 
-    public Book(int bookId, Author author, String name, String category, BookStatus status, LocalDateTime dateOfPurchase) {
+    public Book(int bookId, Author author, String name, String category) {
         this.bookId = bookId;
         this.author = author;
         this.name = name;
         this.category = category;
-        this.status = status;
-        this.dateOfPurchase = dateOfPurchase;
+        this.status = BookStatus.AVAILABLE;
+        this.dateOfPurchase = LocalDateTime.now();
     }
 
     public int getBookId() {
@@ -70,12 +70,12 @@ public class Book {
         return status == BookStatus.AVAILABLE;
     }
 
-    public Reader getBurrower() {
-        return burrower;
+    public Reader getBorrower() {
+        return borrower;
     }
 
-    public void setBurrower(Reader burrower) {
-        this.burrower = burrower;
+    public void setBorrower(Reader borrower) {
+        this.borrower = borrower;
     }
 
     @Override
@@ -88,5 +88,15 @@ public class Book {
     @Override
     public int hashCode() {
         return Objects.hashCode(bookId);
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookId=" + bookId +
+                ", author=" + author +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                '}';
     }
 }

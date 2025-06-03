@@ -16,10 +16,10 @@ public class Reader extends Person{
         this.books = new HashSet<>();
     }
 
-    public Reader(int id, String name, double money, Set<Book> books, MemberRecord record) {
+    public Reader(int id, String name, double money, MemberRecord record) {
         super(id, name);
         this.money = money;
-        this.books = books;
+        this.books = new HashSet<>();
         this.record = record;
     }
 
@@ -37,6 +37,10 @@ public class Reader extends Person{
 
     public MemberRecord getRecord() {
         return record;
+    }
+
+    public void setRecord(MemberRecord record) {
+        this.record = record;
     }
 
     @Override

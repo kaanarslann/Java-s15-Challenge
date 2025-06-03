@@ -7,7 +7,7 @@ import library.model.Novels;
 import java.util.List;
 
 public interface BookFilterable {
-    List<Book> filterByAuthor(Author author);
+    List<Book> filterByAuthor(String authorName);
     List<Book> filterByCategory(String category);
     List<Book> filterByTitle(String title);
     List<Book> listAllBooks();

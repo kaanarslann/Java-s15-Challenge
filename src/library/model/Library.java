@@ -32,7 +32,6 @@ public class Library implements BookFilterable {
     public void newBook(Book book) {
         book.setStatus(BookStatus.AVAILABLE);
         books.add(book);
-        System.out.println("Added new book successfully!");
     }
 
     public void removeBook(Book book) {
@@ -41,12 +40,10 @@ public class Library implements BookFilterable {
         System.out.println("Removed book successfully!");
     }
 
-    public void updateBook(Book currentBook, Book newBook) {
+    public void updateBook(Book currentBook, String newTitle, String newCategory) {
         if(books.contains(currentBook)) {
-            currentBook.setName(newBook.getName());
-            currentBook.setAuthor(newBook.getAuthor());
-            currentBook.setStatus(newBook.getStatus());
-            currentBook.setCategory(newBook.getCategory());
+            currentBook.setName(newTitle);
+            currentBook.setCategory(newCategory);
             System.out.println("Book updated successfully!");
         }else {
             System.out.println("Book not found!");
@@ -56,11 +53,11 @@ public class Library implements BookFilterable {
     public void lendBook(Book book, Reader reader) {
         if(book.getStatus() == BookStatus.AVAILABLE) {
             book.setStatus(BookStatus.BORROWED);
-            book.setBurrower(reader);
+            book.setBorrower(reader);
             reader.recieveBook(book);
             System.out.println("Book lent successfully!");
         } else if (book.getStatus() == BookStatus.BORROWED){
-            System.out.println("Book is currently burrowed by: " + book.getBurrower());
+            System.out.println("Book is currently burrowed by: " + book.getBorrower());
         } else {
             System.out.println("Book is not available on the system!");
         }
@@ -68,7 +65,7 @@ public class Library implements BookFilterable {
 
     public void takeBackBook(Book book) {
         book.setStatus(BookStatus.AVAILABLE);
-        book.setBurrower(null);
+        book.setBorrower(null);
         System.out.println("Book successfully returned!");
     }
 
@@ -78,9 +75,9 @@ public class Library implements BookFilterable {
 
 
     @Override
-    public List<Book> filterByAuthor(Author author) {
+    public List<Book> filterByAuthor(String authorName) {
         return books.stream()
-                .filter(book -> book.getAuthor().getName().equals(author.getName()))
+                .filter(book -> book.getAuthor().getName().equals(authorName))
                 .sorted(Comparator.comparing(Book::getName))
                 .toList();
     }

@@ -6,15 +6,21 @@ import java.util.Map;
 
 public class MemberRecord {
     private Reader reader;
-    private double balance = 0.0;
+    private double balance;
     private int bookCount;
     private String address;
     private String phoneNumber;
     private LocalDateTime dateOfMembership;
     private Map<Book, LocalDateTime> borrowHistory;
 
-    public MemberRecord(Reader reader) {
+    public MemberRecord(Reader reader, String address, String phoneNumber, LocalDateTime dateOfMembership) {
         this.reader = reader;
+        reader.setRecord(this);
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.dateOfMembership = dateOfMembership;
+        this.balance = 0.0;
+        this.bookCount = 0;
         this.borrowHistory = new HashMap<>();
     }
 
