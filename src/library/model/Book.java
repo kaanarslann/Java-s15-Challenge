@@ -41,7 +41,6 @@ public class Book {
         this.name = name;
     }
 
-
     public BookStatus getStatus() {
         return status;
     }
@@ -92,11 +91,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" +
-                "bookId=" + bookId +
-                ", author=" + author +
-                ", name='" + name + '\'' +
-                ", category='" + category + '\'' +
-                '}';
+        return "Book= Id: " + bookId + ".Title: " + name + " by Author: " + author + ".Category: " + category;
     }
 }

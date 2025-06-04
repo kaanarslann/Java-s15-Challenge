@@ -25,12 +25,11 @@ public class LibraryService {
     Reader readerSheldon = new Reader(2, "Sheldon Cooper");
 
     MemberRecord recordJim = new MemberRecord(readerJim, "Scranton", "7856664512", LocalDateTime.now());
-
     MemberRecord recordSheldon = new MemberRecord(readerSheldon, "Pasadena", "5548652231", LocalDateTime.now());
 
     Library library = Library.getInstance();
 
-    public void librarySetup() {
+    private void librarySetup() {
 
         Book daVinciCode = new Novels(1, danBrown, "The Da Vinci Code", "Fictional", 689);
         Book inferno = new Novels(2, danBrown, "Inferno", "Fictional", 642);
@@ -99,7 +98,12 @@ public class LibraryService {
         System.out.println("Library setup complete!");
     }
 
-    public void libraryWelcomeMenu() {
+    public void libraryApp() {
+        librarySetup();
+        libraryWelcomeMenu();
+    }
+
+    private void libraryWelcomeMenu() {
         boolean isRunning = true;
 
         while(isRunning) {
@@ -119,19 +123,16 @@ public class LibraryService {
                     librarianMenu();
                     break;
                 case 3:
+                    System.out.println("Exiting Library Service Menu...");
                     isRunning = false;
+                    break;
                 default:
                     System.out.println("Invalid choice!");
             }
         }
     }
 
-    public void libraryApp() {
-        librarySetup();
-        libraryWelcomeMenu();
-    }
-
-    public void readerMenu() {
+    private void readerMenu() {
         boolean inReaderMenu = true;
         while(inReaderMenu) {
             System.out.println("** Reader's Menu **");
@@ -186,7 +187,7 @@ public class LibraryService {
         }
     }
 
-    public void librarianMenu() {
+    private void librarianMenu() {
         boolean inLibrarianMenu = true;
         while(inLibrarianMenu) {
             System.out.println("** Librarian's Menu **");
@@ -208,13 +209,14 @@ public class LibraryService {
             } else if(choice == 4) {
                 librarianDeleteMenu();
             } else if(choice == 5) {
+                System.out.println("Exiting Librarian's Menu...");
                 inLibrarianMenu = false;
             } else {
                 System.out.println("Invalid choice!");
             }
         }
     }
-    public void librarianFilterMenu() {
+    private void librarianFilterMenu() {
         boolean inFilterMenu = true;
         while(inFilterMenu) {
             System.out.println("** Filter Menu | Please choose a filter option:");
@@ -266,7 +268,7 @@ public class LibraryService {
         }
     }
 
-    public void librarianAddMenu() {
+    private void librarianAddMenu() {
         boolean inAddMenu = true;
         while(inAddMenu) {
             System.out.println("** Add A New Book Menu | Please choose book type:");
@@ -338,7 +340,7 @@ public class LibraryService {
             }
         }
     }
-    public void librarianUpdateMenu() {
+    private void librarianUpdateMenu() {
         boolean inUpdateMenu = true;
         while(inUpdateMenu) {
             List<Book> allBooks = library.listAllBooks();
@@ -363,7 +365,7 @@ public class LibraryService {
             }
         }
     }
-    public void librarianDeleteMenu() {
+    private void librarianDeleteMenu() {
         boolean inDeleteMenu = true;
         while(inDeleteMenu) {
             List<Book> allBooks = library.listAllBooks();

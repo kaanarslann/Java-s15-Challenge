@@ -24,14 +24,6 @@ public class MemberRecord {
         this.borrowHistory = new HashMap<>();
     }
 
-    public MemberRecord(Reader reader, String address, String phoneNumber, LocalDateTime dateOfMembership, Map<Book, LocalDateTime> borrowHistory) {
-        this.reader = reader;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.dateOfMembership = dateOfMembership;
-        this.borrowHistory = borrowHistory;
-    }
-
     public double getBalance() {
         return balance;
     }
@@ -55,5 +47,9 @@ public class MemberRecord {
 
     public int getBookCount() {
         return bookCount;
+    }
+
+    public Map<Book, LocalDateTime> getBorrowHistory() {
+        return borrowHistory;
     }
 }

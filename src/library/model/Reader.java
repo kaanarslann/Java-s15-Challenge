@@ -2,7 +2,6 @@ package library.model;
 
 import library.util.Validator;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 public class Reader extends Person{
@@ -13,17 +12,14 @@ public class Reader extends Person{
 
     public Reader(int id, String name) {
         super(id, name);
+        this.money = 250.50;
         this.books = new HashSet<>();
-    }
-
-    public Reader(int id, String name, double money, MemberRecord record) {
-        super(id, name);
-        this.money = money;
-        this.books = new HashSet<>();
-        this.record = record;
     }
 
     public Set<Book> getBooks() {
+        if(books.isEmpty()) {
+            System.out.println("Reader does not have any book!");
+        }
         return Collections.unmodifiableSet(books);
     }
 
@@ -41,11 +37,6 @@ public class Reader extends Person{
 
     public void setRecord(MemberRecord record) {
         this.record = record;
-    }
-
-    @Override
-    public String whoYouAre() {
-        return "Reader";
     }
 
     public void requestBorrow(Book book, Librarian librarian) {
@@ -70,6 +61,11 @@ public class Reader extends Person{
     @Override
     public String getName() {
         return super.getName();
+    }
+
+    @Override
+    public String whoYouAre() {
+        return "Reader";
     }
 
 }

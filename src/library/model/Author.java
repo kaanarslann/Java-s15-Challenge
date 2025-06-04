@@ -24,7 +24,4 @@ public class Author extends Person {
         return "Author";
     }
 
-
-
-
 }

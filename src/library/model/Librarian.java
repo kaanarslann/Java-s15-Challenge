@@ -4,6 +4,7 @@ import library.util.Validator;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public class Librarian extends Person {
     private String password;
@@ -28,6 +29,8 @@ public class Librarian extends Person {
 
     public void updateBookInfo(Book currentBook, String newTitle, String newCategory) {
         Validator.validate(currentBook);
+        Validator.validate(newTitle);
+        Validator.validate(newCategory);
         library.updateBook(currentBook, newTitle, newCategory);
     }
 
@@ -37,6 +40,11 @@ public class Librarian extends Person {
             reader.setMoney(reader.getMoney() - bookPrice);
             reader.getRecord().updateHistory(book, LocalDateTime.now(), bookPrice);
             library.lendBook(book, reader);
+            Map<Book, LocalDateTime> history = reader.getRecord().getBorrowHistory();
+            System.out.println("Borrow history: ");
+            for (Map.Entry<Book, LocalDateTime> entry : history.entrySet()) {
+                System.out.println(entry.getKey());
+            }
         } else {
             System.out.println("Book request denied!");
             if(reader.getRecord().getBookCount() >= 5){
@@ -45,6 +53,12 @@ public class Librarian extends Person {
                 System.out.println("Requested book is currently borrowed by " + book.getBorrower());
             }
         }
+    }
+
+    public void approveReturn(Book book, Reader reader) {
+        reader.setMoney(reader.getMoney() + bookPrice);
+        reader.getRecord().increaseBalance(bookPrice);
+        library.takeBackBook(book);
     }
 
     public List<Book> listAllBooks() {
@@ -61,12 +75,6 @@ public class Librarian extends Person {
 
     public List<Book> filterByTitle(String title) {
         return library.filterByTitle(title);
-    }
-
-    public void approveReturn(Book book, Reader reader) {
-            reader.setMoney(reader.getMoney() + bookPrice);
-            reader.getRecord().increaseBalance(bookPrice);
-            library.takeBackBook(book);
     }
 
     @Override

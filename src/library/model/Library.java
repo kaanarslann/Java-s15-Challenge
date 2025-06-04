@@ -69,11 +69,6 @@ public class Library implements BookFilterable {
         System.out.println("Book successfully returned!");
     }
 
-    public String showBook(Book book) {
-        return "Author: " + book.getAuthor() + " Name: " + book.getName();
-    }
-
-
     @Override
     public List<Book> filterByAuthor(String authorName) {
         return books.stream()
